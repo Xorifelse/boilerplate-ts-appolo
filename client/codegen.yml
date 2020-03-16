@@ -1,0 +1,23 @@
+schema: 'http://localhost:4001'
+overwrite: true
+hooks:
+  afterAllFileWrite:
+    - prettier --write
+generates:
+  ./graphql/index.tsx:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
+  ./graphql/hooks.tsx:
+    plugins:
+      - 'apollo-hooks-codegen'
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      withMutationFn: true
+      hooksImportFrom: '@apollo/react-hooks'
+  ./graphql/schema.json:
+    plugins:
+      - 'introspection'
